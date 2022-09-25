@@ -6,8 +6,8 @@ class Anfibio(Animal):
     ranas = 0
     salamandras = 0
 
-    def __init__(self, nombre, edad, habitat, genero, zona, colorPiel, venenoso) -> None:
-        super().__init__(nombre, edad, habitat, genero, zona)
+    def __init__(self, nombre, edad, habitat, genero, colorPiel, venenoso) -> None:
+        super().__init__(nombre, edad, habitat, genero)
         self._colorPiel = colorPiel
         self._venenoso = venenoso
 
@@ -17,14 +17,14 @@ class Anfibio(Animal):
 
     @classmethod
     def crearRana(cls, nombre, edad, genero):
-        rana = Anfibio(nombre, edad, "selva", genero, Animal.getZona, "rojo", True)
+        rana = Anfibio(nombre, edad, "selva", genero, "rojo", True)
         Anfibio.listado.append(rana)
         Anfibio.ranas += 1
         return rana
 
     @classmethod
     def crearSalamandra(cls, nombre, edad, genero):
-        salamandra = Anfibio(nombre, edad, "selva", genero, Animal.getZona, "negro y amarillo", False)
+        salamandra = Anfibio(nombre, edad, "selva", genero, "negro y amarillo", False)
         Anfibio.listado.append(salamandra)
         Anfibio.salamandras += 1
         return salamandra
@@ -44,7 +44,7 @@ class Anfibio(Animal):
     def setColorPiel(self, colorPiel):
         self._colorPiel = colorPiel
 
-    def getVenenoso(self):
+    def isVenenoso(self):
         return self._venenoso
     
     def setVenenoso(self, venenoso):

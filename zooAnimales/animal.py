@@ -1,14 +1,7 @@
-"""""
-from zooAnimales.anfibio import Anfibio
-from zooAnimales.ave import Ave
-from zooAnimales.mamifero import Mamifero
-from zooAnimales.pez import Pez
-from zooAnimales.reptil import Reptil
-"""
-
 class Animal:
     totalAnimales = 0
-    def __init__(self, nombre, edad, habitat, genero, zona) -> None:
+
+    def __init__(self, nombre, edad, habitat, genero, zona=None) -> None:
         self._nombre = nombre
         self._edad = edad
         self._habitat = habitat
@@ -16,27 +9,27 @@ class Animal:
         self._zona = zona
         Animal.totalAnimales+=1
     
-    """"
-    @staticmethod
-    def totalPorTipo():
-        return f'''
-        Mamiferos: {Mamifero.cantidadMamiferos()}\n
-        Aves: {Ave.cantidadAves()}\n
-        Reptiles: {Reptil.cantidadReptiles()}\n
-        Peces: {Pez.cantidadPeces()}\n
-        Anfibios: {Anfibio.cantidadAnfibios()}'''
-    """
-
-    def __str__(self) -> str:
-        if self._zona is None:
-            return f'''Mi nombre es {self._nombre}, tengo una edad de {self._edad},
-            habito en {self._habitat} y mi genero es {self._genero}'''
-        else:
-            return f'''Mi nombre es {self._nombre}, tengo una edad de {self._edad},
-            habito en {self._habitat} y mi genero es {self._genero}, la zona en la que me ubico es {self._zona},
-            en el {self._zona._zoo}'''
-
     
+    @classmethod
+    def totalPorTipo(cls):
+        from zooAnimales.mamifero import Mamifero
+        from zooAnimales.ave import Ave
+        from zooAnimales.reptil import Reptil
+        from zooAnimales.pez import Pez
+        from zooAnimales.anfibio import Anfibio
+        return "Mamiferos : " + str(Mamifero.cantidadMamiferos()) + '\n' + \
+               "Aves : " + str(Ave.cantidadAves()) + '\n' + \
+               "Reptiles : " + str(Reptil.cantidadReptiles()) + '\n' + \
+               "Peces : " + str(Pez.cantidadPeces()) + '\n' + \
+               "Anfibios : " + str(Anfibio.cantidadAnfibios())
+    
+
+    def toString(self) -> str:
+        if self._zona is None:
+            return f'''Mi nombre es {self._nombre}, tengo una edad de {self._edad}, habito en {self._habitat} y mi genero es {self._genero}'''
+        else:
+            return f'''Mi nombre es {self._nombre}, tengo una edad de {self._edad}, habito en {self._habitat} y mi genero es {self._genero}, la zona en la que me ubico es {self._zona}, en el {self._zona._zoo}'''
+
     @classmethod
     def getTotalAnimales(cls):
         return Animal.getTotalAnimales
